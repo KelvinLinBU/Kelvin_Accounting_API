@@ -31,6 +31,7 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
 - Maven
 - MySQL
 - iText 7.2.6
+- Docker/Docker Desktop
 
 ### Steps to Run Locally
 1. Clone the repository:
