@@ -66,6 +66,7 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
 1. Create a new balance sheet:
    ```bash
    curl -X POST http://localhost:8080/balancesheets    -H "Content-Type: application/json"    -d '{
+        "company_name": "Github Inc.",
        "date": "2025-01-02",
        "assets": [{"name": "Cash", "value": 5000}],
        "liabilities": [{"name": "Loan", "value": 3000}],
