@@ -72,6 +72,7 @@ public class BalanceSheetService {
      */
     public Optional<BalanceSheet> updateBalanceSheet(Long id, BalanceSheet updatedBalanceSheet) {
         return balanceSheetRepository.findById(id).map(existingBalanceSheet -> {
+            existingBalanceSheet.setCompany_name(updatedBalanceSheet.getCompany_name()); 
             existingBalanceSheet.setDate(updatedBalanceSheet.getDate());
             existingBalanceSheet.setAssets(updatedBalanceSheet.getAssets());
             existingBalanceSheet.setLiabilities(updatedBalanceSheet.getLiabilities());

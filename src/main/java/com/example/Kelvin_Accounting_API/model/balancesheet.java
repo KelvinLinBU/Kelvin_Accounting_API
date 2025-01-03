@@ -38,6 +38,12 @@ public class BalanceSheet {
     private Long id; 
 
     /**
+     * This is the company that the balance sheet will be associated with.
+     * <p>Not a mandatory field. Placeholder of ABC Company
+     */
+    private String company_name;
+
+    /**
      * This is the date that the balance sheet will be associated with.
      * <p>This is a mandatory field and is in the format: MM-DD-YYYY
      */
@@ -75,18 +81,38 @@ public class BalanceSheet {
 
     /**
      * Construct a new balance sheet with the specified date, assets, liabilities, and equities
+     * @param company_name Company name
      * @param date Date of the balance sheet
      * @param assets List of assets
      * @param liabilities List of liabilities
      * @param equities List of equities
      */
-    public BalanceSheet(String date, List<Asset> assets, List<Liability> liabilities, List<Equity> equities){
+    public BalanceSheet(String company_name, String date, List<Asset> assets, List<Liability> liabilities, List<Equity> equities){
+      
+        System.out.println("here"); 
+        company_name = company_name.trim();
+        String[] words = company_name.split("\\s+");
+        StringBuilder formattedName = new StringBuilder();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                formattedName.append(Character.toUpperCase(word.charAt(0)))  // Uppercase first letter
+                             .append(word.substring(1).toLowerCase())         // Lowercase the rest
+                             .append(" ");                                    // Add a space
+            }
+        
+        
+        this.company_name = formattedName.toString().trim(); 
+    }
+        if (this.company_name == null || this.company_name.isBlank() || this.company_name.trim().isEmpty() || this.company_name == ""){
+            this.company_name = "ABC Corp"; 
+        }
         this.date = date;
         this.assets = assets;
         this.liabilities = liabilities; 
         this.equities = equities; 
     }
-    
+
+
     /**
      * retrieve unique id for balance sheet
      * @return return the balance sheet id
@@ -101,6 +127,22 @@ public class BalanceSheet {
      */
     public void setId(Long id){
         this.id = id;
+    }
+
+    /**
+     * Retrieve company of the balance sheet
+     * @return return the company name
+     */
+    public String getCompany_name(){
+        return company_name; 
+    }
+
+    /**
+     * set new company of the balance sheet
+     * @param company_name takes in company_name String
+     */
+    public void setCompany_name(String company_name){
+        this.company_name = company_name; 
     }
 
     /**
@@ -175,7 +217,7 @@ public class BalanceSheet {
     @Override
     public String toString() {
         return "BalanceSheet{" +
-               "id=" + id +
+               "id=" + id + ", name=" + company_name + 
                ", date='" + date + '\'' +
                ", assets=" + assets +
                ", liabilities=" + liabilities +

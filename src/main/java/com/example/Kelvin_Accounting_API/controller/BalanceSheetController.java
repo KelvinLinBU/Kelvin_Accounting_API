@@ -61,6 +61,9 @@ public class BalanceSheetController {
   @PostMapping
 public BalanceSheet createBalanceSheet(@RequestBody BalanceSheet balanceSheet) {
     // Ensure the relationship is set for Assets
+    if (balanceSheet.getCompany_name() == null || balanceSheet.getCompany_name().trim().isEmpty()) {
+        balanceSheet.setCompany_name("ABC Corp.");  // Set default value
+    }
     if (balanceSheet.getAssets() != null) {
         for (Asset asset : balanceSheet.getAssets()) {
             asset.setBalanceSheet(balanceSheet);

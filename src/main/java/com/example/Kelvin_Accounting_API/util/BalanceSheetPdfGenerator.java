@@ -41,6 +41,7 @@ public class BalanceSheetPdfGenerator {
             Document document = new Document(pdfDocument);
 
             // Add content to the PDF
+            document.add(new Paragraph(balanceSheet.getCompany_name())); 
             document.add(new Paragraph("Balance Sheet"));
             document.add(new Paragraph("Date: " + balanceSheet.getDate()));
             document.add(new Paragraph("Assets:"));
