@@ -25,6 +25,7 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.kernel.colors.ColorConstants;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -50,15 +51,21 @@ public class BalanceSheetPdfGenerator {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             // Initialize PdfWriter and PdfDocument
             PdfWriter writer = new PdfWriter(baos);
-            PdfDocument pdfDocument = new PdfDocument(writer);
-            Document document = new Document(pdfDocument);
-            String calibriFontPath = "resources/calibri-font-family/calibri-regular.ttf";
-            PdfFont calibriFont = PdfFontFactory.createFont(calibriFontPath, "WinAnsi", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+        PdfDocument pdfDocument = new PdfDocument(writer);
+        Document document = new Document(pdfDocument);
+
+        // Load font from classpath
+        //InputStream fontStream = getClass().getClassLoader().getResourceAsStream("calibri-font-family/calibri-regular.ttf");
+        //if (fontStream == null) {
+          //  throw new IllegalArgumentException("Font file not found!");
+        //}
+        //PdfFont calibriFont = PdfFontFactory.createFont(fontStream.readAllBytes(), "WinAnsi", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+
             String companyName = balanceSheet.getCompany_name().replaceAll("\\s+", "_"); // Replace spaces with underscores
             String date = balanceSheet.getDate();
             String fileName = companyName + "_BalanceSheet_" + date + ".pdf";
             // Set the font for the document
-            document.setFont(calibriFont);
+            //document.setFont(calibriFont);
             // Add content to the PDF
             document.add(new Paragraph(balanceSheet.getCompany_name()).setTextAlignment(TextAlignment.CENTER).setFontSize(18).setBold().setFontColor(ColorConstants.BLACK).setMarginBottom(-10)); 
             document.add(new Paragraph("Balance Sheet at " + balanceSheet.getDate()).setTextAlignment(TextAlignment.CENTER).setFontSize(18).setBold().setFontColor(ColorConstants.BLACK));

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpHeaders;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -128,7 +130,8 @@ public BalanceSheet createBalanceSheet(@RequestBody BalanceSheet balanceSheet) {
     byte[] pdfData = balanceSheetPdfGenerator.generatePdf(balanceSheet, filename);
 
     return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + URLEncoder.encode(filename, StandardCharsets.UTF_8))
+
             .contentType(MediaType.APPLICATION_PDF)
             .body(pdfData);
 }
