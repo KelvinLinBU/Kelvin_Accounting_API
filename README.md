@@ -54,16 +54,6 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
 
 4. Access the API at `http://localhost:8080`.
 
-## Endpoints
-
-### Balance Sheet Endpoints
-- `POST /balancesheets`: Create a new balance sheet.
-- `GET /balancesheets`: Retrieve all balance sheets.
-- `GET /balancesheets/{id}`: Retrieve a specific balance sheet by ID.
-- `PUT /balancesheets/{id}`: Update an existing balance sheet.
-- `DELETE /balancesheets/{id}`: Delete a balance sheet by ID.
-- `GET /balancesheets/{id}/pdf`: Generate a PDF for the specified balance sheet.
-
 ## Project Structure
 
 - `src/main/java`
@@ -95,6 +85,14 @@ A balance sheet in this API contains the following:
 - **Assets:** A list of resources owned by the company, each with a `name` and `value`.
 - **Liabilities:** A list of obligations or debts, each with a `name` and `value`.
 - **Equities:** A list of owner investments or retained earnings, each with a `name` and `value`.
+
+### Balance Sheet Endpoints
+- `POST /balancesheets`: Create a new balance sheet.
+- `GET /balancesheets`: Retrieve all balance sheets.
+- `GET /balancesheets/{id}`: Retrieve a specific balance sheet by ID.
+- `PUT /balancesheets/{id}`: Update an existing balance sheet.
+- `DELETE /balancesheets/{id}`: Delete a balance sheet by ID.
+- `GET /balancesheets/{id}/pdf`: Generate a PDF for the specified balance sheet.
 
 ### Using `curl`
 1. Create a new balance sheet:
