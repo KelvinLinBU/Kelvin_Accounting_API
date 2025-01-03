@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
  * Repository interface for managing liabilities.
  * <p>
  * Provides CRUD operations and additional query capabilities for the {@link Liability} entity.
+ * 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 @Repository
 public interface LiabilityRepository extends JpaRepository<Liability, Long> {

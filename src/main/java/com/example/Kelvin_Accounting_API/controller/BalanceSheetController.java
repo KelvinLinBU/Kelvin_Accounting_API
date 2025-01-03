@@ -25,9 +25,9 @@ import java.util.Optional;
  * balance sheets. It interacts with the {@link BalanceSheetService} to perform
  * business logic and return appropriate HTTP responses.</p>
  * 
- * <p>Base URL: <b>/api/v1/balance-sheets</b></p>
+ * <p>Base URL: <b>/balancesheets</b></p>
  * 
- * @author Kelvin
+ * @author KelvinLinBU
  * @version 1.0
  * @since 2025-01-02
  */
@@ -36,7 +36,7 @@ import java.util.Optional;
 public class BalanceSheetController {
 
     private final BalanceSheetService balanceSheetService;
-private final BalanceSheetPdfGenerator balanceSheetPdfGenerator;
+    private final BalanceSheetPdfGenerator balanceSheetPdfGenerator;
 
 
     /**

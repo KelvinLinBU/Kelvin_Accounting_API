@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
  * Repository interface for managing balance sheets.
  * <p>
  * Provides CRUD operations and additional query capabilities for the {@link BalanceSheet} entity.
+ 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 @Repository
 public interface BalanceSheetRepository extends JpaRepository<BalanceSheet, Long> {

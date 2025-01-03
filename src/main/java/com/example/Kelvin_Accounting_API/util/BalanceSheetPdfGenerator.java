@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * Utility class for generating a PDF representation of a balance sheet.
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 @Component
 public class BalanceSheetPdfGenerator {

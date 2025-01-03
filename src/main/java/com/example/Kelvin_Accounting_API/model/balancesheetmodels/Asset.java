@@ -6,7 +6,14 @@ import jakarta.persistence.*;
 import com.example.Kelvin_Accounting_API.model.BalanceSheet;
 
 /**
- * Represent an asset in the balance sheet
+ * Model class for an asset
+ * in a rudimentary accounting software
+ * <p>Assets are resources with economic value that a company owns or controls with the expectation that it will provide a future benefit. 
+ * This class maps to the "assets" table in the database.</p>
+ * 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 
  @Entity

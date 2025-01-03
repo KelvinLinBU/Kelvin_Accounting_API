@@ -6,11 +6,18 @@ import jakarta.persistence.*;
 import com.example.Kelvin_Accounting_API.model.BalanceSheet;
 
 /**
- * Represent an liability in the balance sheet
+ * Model class for an asset
+ * in a rudimentary accounting software
+ * <p>Liabilities is something that a company owes and are settled over time through transfer of economic benefits. 
+ * This class maps to the "liabilities" table in the database.</p>
+ * 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 
  @Entity
- @Table(name = "liabilities") //call table assets
+ @Table(name = "liabilities") //call table liabilities
 public class Liability {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   

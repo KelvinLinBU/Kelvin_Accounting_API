@@ -6,7 +6,14 @@ import jakarta.persistence.*;
 import com.example.Kelvin_Accounting_API.model.BalanceSheet;
 
 /**
- * Represent an equity in the balance sheet
+ * Model class for an equity
+ * in a rudimentary accounting software
+ * <p>Equity represents the value that would be returned to a company's shareholders if all the assets were liquidated and all of the company's debts were paid off. 
+ * This class maps to the "equities" table in the database.</p>
+ * 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
 
  @Entity

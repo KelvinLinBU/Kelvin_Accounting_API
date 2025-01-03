@@ -14,7 +14,7 @@ import java.util.Optional;
  * and deleting balance sheets. It interacts with the {@link BalanceSheetRepository}
  * to perform database operations.</p>
  * 
- * @author Kelvin
+ * @author KelvinLinBU
  * @version 1.0
  * @since 2025-01-02
  */

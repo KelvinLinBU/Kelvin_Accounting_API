@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
  * Repository interface for managing assets.
  * <p>
  * Provides CRUD operations and additional query capabilities for the {@link Asset} entity.
+ * 
+ * @author KelvinLinBU
+ * @version 1.0
+ * @since 2025-01-02
  */
+
 @Repository
 public interface AssetRepository extends JpaRepository<Asset, Long> {
     // Custom queries can be added here if needed.
