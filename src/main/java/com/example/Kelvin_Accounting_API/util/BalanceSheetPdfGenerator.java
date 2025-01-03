@@ -25,6 +25,8 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.kernel.colors.ColorConstants;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -43,7 +45,7 @@ public class BalanceSheetPdfGenerator {
      * @param filename The name of the generated PDF file.
      * @return A byte array containing the generated PDF data.
      */
-    public byte[] generatePdf(BalanceSheet balanceSheet, String filename) {
+    public byte[] generatePdf(BalanceSheet balanceSheet) {
         // Create a ByteArrayOutputStream to hold the PDF data
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             // Initialize PdfWriter and PdfDocument
@@ -52,16 +54,18 @@ public class BalanceSheetPdfGenerator {
             Document document = new Document(pdfDocument);
             String calibriFontPath = "resources/calibri-font-family/calibri-regular.ttf";
             PdfFont calibriFont = PdfFontFactory.createFont(calibriFontPath, "WinAnsi", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
-
-        // Set the font for the document
-        document.setFont(calibriFont);
+            String companyName = balanceSheet.getCompany_name().replaceAll("\\s+", "_"); // Replace spaces with underscores
+            String date = balanceSheet.getDate();
+            String fileName = companyName + "_BalanceSheet_" + date + ".pdf";
+            // Set the font for the document
+            document.setFont(calibriFont);
             // Add content to the PDF
             document.add(new Paragraph(balanceSheet.getCompany_name()).setTextAlignment(TextAlignment.CENTER).setFontSize(18).setBold().setFontColor(ColorConstants.BLACK).setMarginBottom(-10)); 
             document.add(new Paragraph("Balance Sheet at " + balanceSheet.getDate()).setTextAlignment(TextAlignment.CENTER).setFontSize(18).setBold().setFontColor(ColorConstants.BLACK));
             SolidLine line = new SolidLine(1f);  // Line thickness
-        LineSeparator separator = new LineSeparator(line).setFontColor(ColorConstants.BLACK);
-        separator.setMarginBottom(10);  // Add margin below the line
-        separator.setMarginTop(10); 
+            LineSeparator separator = new LineSeparator(line).setFontColor(ColorConstants.BLACK);
+            separator.setMarginBottom(10);  // Add margin below the line
+            separator.setMarginTop(10); 
             document.add(separator); 
             document.add(new Paragraph("Assets:").setBold());
             Double total_assets = 0.0;

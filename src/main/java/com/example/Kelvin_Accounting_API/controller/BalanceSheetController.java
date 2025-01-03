@@ -113,15 +113,22 @@ public BalanceSheet createBalanceSheet(@RequestBody BalanceSheet balanceSheet) {
 
 
   @GetMapping("/{id}/pdf")
-public ResponseEntity<byte[]> generatePdf(@PathVariable Long id) {
+  public ResponseEntity<byte[]> generatePdf(@PathVariable Long id) {
     Optional<BalanceSheet> balanceSheetOptional = balanceSheetService.getBalanceSheetById(id);
     if (balanceSheetOptional.isEmpty()) {
         return ResponseEntity.notFound().build();
     }
     BalanceSheet balanceSheet = balanceSheetOptional.get();
-    byte[] pdfData = balanceSheetPdfGenerator.generatePdf(balanceSheet, "balance_sheet_" + id + ".pdf");
+
+    // Auto-generate filename using company name and date
+    String formattedDate = balanceSheet.getDate().replaceAll("-", "");
+    String companyName = balanceSheet.getCompany_name().replaceAll("\\s+", "_");  // Replace spaces with underscores
+    String filename = companyName + "_BalanceSheet_" + formattedDate + ".pdf";
+
+    byte[] pdfData = balanceSheetPdfGenerator.generatePdf(balanceSheet, filename);
+
     return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=balance_sheet_" + id + ".pdf")
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
             .contentType(MediaType.APPLICATION_PDF)
             .body(pdfData);
 }
