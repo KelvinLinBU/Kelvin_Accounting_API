@@ -12,6 +12,7 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
   - Equities
 - **Spring Boot Framework**: Ensures robust and scalable implementation.
 - **MySQL Database Integration**: Stores all accounting data persistently.
+- **Docker Containerization**: Implementation of docker containerization so it's easily deployable. 
 - **Custom File Naming:** Automatically formats the filename as `CompanyName_BalanceSheet_YYYYMMDD.pdf`.
 - **Data Validation:** Ensures that the sum of assets equals the sum of liabilities and equities.
 - **Default Values:** Automatically sets the company name to "ABC Corp." if left blank or empty.
@@ -31,7 +32,7 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
 - MySQL
 - iText 7.2.6
 
-### Steps
+### Steps to Run Locally
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-repo/Kelvin_Accounting_API.git
@@ -53,6 +54,21 @@ The **Kelvin Accounting API** is a RESTful application built with **Spring Boot*
    ```
 
 4. Access the API at `http://localhost:8080`.
+
+## Steps to Run Containerized
+1. Build and start API:
+```
+docker compose build --no-cache
+```
+
+2. Access the MySQL DB (note your designated password):
+```
+docker exec -it mysql-1 mysql -uroot -p
+```
+3. Stop the containers:
+```
+docker compose down
+```
 
 ## Project Structure
 
