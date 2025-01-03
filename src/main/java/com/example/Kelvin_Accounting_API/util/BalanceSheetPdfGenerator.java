@@ -42,23 +42,31 @@ public class BalanceSheetPdfGenerator {
 
             // Add content to the PDF
             document.add(new Paragraph(balanceSheet.getCompany_name())); 
-            document.add(new Paragraph("Balance Sheet"));
-            document.add(new Paragraph("Date: " + balanceSheet.getDate()));
+            document.add(new Paragraph("Balance Sheet at " + balanceSheet.getDate()));
             document.add(new Paragraph("Assets:"));
-            balanceSheet.getAssets().forEach(asset -> {
+            Double total_assets = 0.0;
+            for (Asset asset : balanceSheet.getAssets()) {
                 document.add(new Paragraph(" - " + asset.getName() + ": $" + asset.getValue()));
-            });
-
+                total_assets += asset.getValue();  // Increment value
+            }
+            document.add(new Paragraph("Total Assets: " + String.valueOf(total_assets))); 
+            
             document.add(new Paragraph("Liabilities:"));
-            balanceSheet.getLiabilities().forEach(liability -> {
+            Double total_liabilities = 0.0; 
+            for (Liability liability : balanceSheet.getLiabilities()) {
                 document.add(new Paragraph(" - " + liability.getName() + ": $" + liability.getValue()));
-            });
-
+                total_liabilities += liability.getValue();  // Increment value
+            }
+            document.add(new Paragraph("Total Liabilities: " + String.valueOf(total_liabilities))); 
+            
+            Double total_equities = 0.0; 
             document.add(new Paragraph("Equities:"));
-            balanceSheet.getEquities().forEach(equity -> {
+            for (Equity equity : balanceSheet.getEquities()) {
                 document.add(new Paragraph(" - " + equity.getName() + ": $" + equity.getValue()));
-            });
-
+                total_equities += equity.getValue();  // Increment value
+            }
+            document.add(new Paragraph("Total Equities: " + String.valueOf(total_equities))); 
+            document.add(new Paragraph("Total Liabilities and Equities: " + String.valueOf((total_equities + total_liabilities)))); 
             // Close the document
             document.close();
 
