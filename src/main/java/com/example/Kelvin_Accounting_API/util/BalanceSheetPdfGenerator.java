@@ -85,6 +85,7 @@ public class BalanceSheetPdfGenerator {
                 document.add(new Paragraph(equity.getName() + ": $" + equity.getValue()).setFontColor(ColorConstants.BLUE));
                 total_equities += equity.getValue();  // Increment value
             }
+            
             document.add(new Paragraph("Total Equities: $" + String.valueOf(total_equities)).setBold()); 
             document.add(separator); 
             document.add(new Paragraph("Total Liabilities and Equities: $" + String.valueOf((total_equities + total_liabilities))).setBold()); 

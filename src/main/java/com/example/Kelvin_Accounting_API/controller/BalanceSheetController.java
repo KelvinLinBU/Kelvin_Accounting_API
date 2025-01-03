@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpHeaders;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,32 +61,55 @@ public class BalanceSheetController {
      */
   @PostMapping
 public BalanceSheet createBalanceSheet(@RequestBody BalanceSheet balanceSheet) {
-    // Ensure the relationship is set for Assets
+    // Ensure the company name is set
     if (balanceSheet.getCompany_name() == null || balanceSheet.getCompany_name().trim().isEmpty()) {
         balanceSheet.setCompany_name("ABC Corp.");  // Set default value
     }
+
+    // Ensure the relationship is set for Assets
+    double totalAssets = 0.0;
     if (balanceSheet.getAssets() != null) {
         for (Asset asset : balanceSheet.getAssets()) {
             asset.setBalanceSheet(balanceSheet);
+            totalAssets += asset.getValue();  // Sum total assets
         }
     }
 
     // Ensure the relationship is set for Liabilities
+    double totalLiabilities = 0.0;
     if (balanceSheet.getLiabilities() != null) {
         for (Liability liability : balanceSheet.getLiabilities()) {
             liability.setBalanceSheet(balanceSheet);
+            totalLiabilities += liability.getValue();  // Sum total liabilities
         }
     }
 
     // Ensure the relationship is set for Equities
+    double totalEquities = 0.0;
     if (balanceSheet.getEquities() != null) {
         for (Equity equity : balanceSheet.getEquities()) {
             equity.setBalanceSheet(balanceSheet);
+            totalEquities += equity.getValue();  // Sum total equities
         }
     }
 
+    // Check if total assets equal total liabilities + total equities
+    double totalLiabilitiesAndEquities = totalLiabilities + totalEquities;
+    if (totalAssets != totalLiabilitiesAndEquities) {
+        double difference = totalAssets - totalLiabilitiesAndEquities;
+
+        // Add an adjustment entry to equities to balance the balance sheet
+        Equity adjustmentEquity = new Equity("Reconciliation Adjustment", difference, balanceSheet);
+        if (balanceSheet.getEquities() == null) {
+            balanceSheet.setEquities(new ArrayList<>());
+        }
+        balanceSheet.getEquities().add(adjustmentEquity);
+    }
+
+    // Save the balance sheet
     return balanceSheetService.createBalanceSheet(balanceSheet);
 }
+
 
 
   @GetMapping("/{id}/pdf")
